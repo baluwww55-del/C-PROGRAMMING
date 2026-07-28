@@ -64,6 +64,7 @@ int main() {
             default:
                 printf("Invalid Choice!\n");
         }
+# this is the simple basic program to find the student details using c programming language :
     }
 
     return 0;
