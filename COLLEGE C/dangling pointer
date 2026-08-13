@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int *ptr = new int(50);
+
+    cout << "Value: " << *ptr << endl;
+
+    delete ptr;   // Memory is released
+
+    // ptr is now a dangling pointer
+    // cout << *ptr << endl;  // ❌ Don't do this
+
+    ptr = nullptr;  // Fix: make the pointer safe
+
+    return 0;
+}
