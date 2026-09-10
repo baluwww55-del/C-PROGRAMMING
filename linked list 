@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for a node
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+// Display the linked list
+void display(struct Node *head) {
+    struct Node *temp = head;
+
+    if (head == NULL) {
+        printf("Linked list is empty.\n");
+        return;
+    }
+
+    printf("Linked List: ");
+
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+
+    printf("NULL\n");
+}
+
+// Insert node at the beginning
+struct Node* insertBeginning(struct Node *head, int value) {
+    struct Node *newNode;
+
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    newNode->data = value;
+    newNode->next = head;
+
+    return newNode;
+}
+
+// Insert node at the end
+struct Node* insertEnd(struct Node *head, int value) {
+    struct Node *newNode;
+    struct Node *temp;
+
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        return newNode;
+    }
+
+    temp = head;
+
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    temp->next = newNode;
+
+    return head;
+}
+
+// Delete node from beginning
+struct Node* deleteBeginning(struct Node *head) {
+    if (head == NULL) {
+        printf("Linked list is empty.\n");
+        return NULL;
+    }
+
+    struct Node *temp = head;
+    head = head->next;
+
+    free(temp);
+
+    return head;
+}
+
+int main() {
+    struct Node *head = NULL;
+
+    // Insert elements
+    head = insertEnd(head, 10);
+    head = insertEnd(head, 20);
+    head = insertEnd(head, 30);
+
+    display(head);
+
+    // Insert at beginning
+    head = insertBeginning(head, 5);
+
+    display(head);
+
+    // Delete from beginning
+    head = deleteBeginning(head);
+
+    display(head);
+
+    return 0;
+}
