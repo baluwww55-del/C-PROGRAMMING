@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+// Create a new node
+struct Node* createNode(int data) {
+    struct Node *newNode;
+
+    newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    newNode->data = data;
+    newNode->next = NULL;
+
+    return newNode;
+}
+
+// Insert at the beginning
+struct Node* insertBeginning(struct Node *head, int data) {
+    struct Node *newNode = createNode(data);
+
+    newNode->next = head;
+    head = newNode;
+
+    return head;
+}
+
+// Insert at the end
+struct Node* insertEnd(struct Node *head, int data) {
+    struct Node *newNode = createNode(data);
+
+    if (head == NULL) {
+        return newNode;
+    }
+
+    struct Node *temp = head;
+
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    temp->next = newNode;
+
+    return head;
+}
+
+// Delete from beginning
+struct Node* deleteBeginning(struct Node *head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+
+    struct Node *temp = head;
+    head = head->next;
+
+    free(temp);
+
+    return head;
+}
+
+// Display the linked list
+void display(struct Node *head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    struct Node *temp = head;
+
+    printf("Linked List: ");
+
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node *head = NULL;
+
+    // Insert elements
+    head = insertEnd(head, 10);
+    head = insertEnd(head, 20);
+    head = insertEnd(head, 30);
+
+    printf("After inserting at end:\n");
+    display(head);
+
+    // Insert at beginning
+    head = insertBeginning(head, 5);
+
+    printf("\nAfter inserting at beginning:\n");
+    display(head);
+
+    // Delete from beginning
+    head = deleteBeginning(head);
+
+    printf("\nAfter deleting from beginning:\n");
+    display(head);
+
+    return 0;
+}
