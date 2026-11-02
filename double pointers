@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    int num = 100;
+
+    // Single pointer
+    int *ptr = &num;
+
+    // Double pointer
+    int **ptr2 = &ptr;
+
+    printf("Value of num: %d\n", num);
+
+    printf("Address of num: %p\n", (void *)&num);
+
+    printf("Value using single pointer: %d\n", *ptr);
+
+    printf("Address stored in ptr: %p\n", (void *)ptr);
+
+    printf("Value using double pointer: %d\n", **ptr2);
+
+    printf("Address stored in ptr2: %p\n", (void *)ptr2);
+
+    return 0;
+}
