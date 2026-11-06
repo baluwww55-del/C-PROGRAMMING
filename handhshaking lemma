@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int main() {
+    int n, graph[20][20];
+    int degree, totalDegree = 0;
+    int edges = 0;
+
+    printf("Enter number of vertices: ");
+    scanf("%d", &n);
+
+    printf("Enter adjacency matrix:\n");
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+
+    printf("\nDegree of each vertex:\n");
+
+    for (int i = 0; i < n; i++) {
+        degree = 0;
+
+        for (int j = 0; j < n; j++) {
+            degree += graph[i][j];
+        }
+
+        printf("Degree of vertex %d = %d\n", i + 1, degree);
+
+        totalDegree += degree;
+    }
+
+    // Count each undirected edge only once
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (graph[i][j] == 1) {
+                edges++;
+            }
+        }
+    }
+
+    printf("\nTotal degree = %d\n", totalDegree);
+    printf("Total number of edges = %d\n", edges);
+
+    printf("2 * Edges = %d\n", 2 * edges);
+
+    if (totalDegree == 2 * edges) {
+        printf("\nHandshaking Lemma is Verified!\n");
+    } else {
+        printf("\nHandshaking Lemma is Not Verified!\n");
+    }
+
+    return 0;
+}
